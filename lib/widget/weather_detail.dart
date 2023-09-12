@@ -7,7 +7,14 @@ class WeatherDetail extends StatelessWidget {
     fontSize: 14,
     color: primaryYellow,
   );
-  WeatherDetail({super.key});
+  final String windSpeed;
+  final String humidity;
+  final int visibility;
+  WeatherDetail(
+      {super.key,
+      required this.windSpeed,
+      required this.humidity,
+      required this.visibility});
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +33,21 @@ class WeatherDetail extends StatelessWidget {
         children: [
           //!wind
           Factor(
-            unit: "2km/h",
+            unit: "${windSpeed}km\\h",
             title: "Wind",
             textStyle: _textStyle,
             iconData: Icons.air,
           ),
           //!humidity
           Factor(
-            unit: "62%",
+            unit: "$humidity%",
             title: "Humidity",
             textStyle: _textStyle,
             iconData: Icons.water_drop_outlined,
           ),
           //!visibility
           Factor(
-            unit: "1.6km",
+            unit: "${visibility / 1000.toInt()}km",
             title: "Visibility",
             textStyle: _textStyle,
             iconData: Icons.visibility_outlined,

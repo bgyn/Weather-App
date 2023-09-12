@@ -2,11 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailSummary extends StatelessWidget {
+  final String maxTemp;
+  final String minTemp;
+  final String feelsLike;
+  final String description;
+  DetailSummary({
+    super.key,
+    required this.maxTemp,
+    required this.minTemp,
+    required this.description,
+    required this.feelsLike,
+  });
   final TextStyle textStyle = GoogleFonts.ledger(
     fontSize: 12,
     fontWeight: FontWeight.w800,
   );
-  DetailSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +34,15 @@ class DetailSummary extends StatelessWidget {
           height: 5,
         ),
         Text(
-          'Now it feels like like +35, actually +31',
+          'Now it feels like like +$maxTemp, actually +$feelsLike',
           style: textStyle,
         ),
         Text(
-          'It feels hot because of the direct sun. Today',
+          "${description[0].toUpperCase()}${description.substring(1).toLowerCase()}",
           style: textStyle,
         ),
         Text(
-          'the temperature is felt in the range from 31° to 27°',
+          'the temperature is felt in the range from $minTemp° to $maxTemp°',
           style: textStyle,
         ),
       ],
