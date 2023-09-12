@@ -36,7 +36,7 @@ class WeatherDetail extends StatelessWidget {
             unit: "62%",
             title: "Humidity",
             textStyle: _textStyle,
-            iconData: Icons.water_drop,
+            iconData: Icons.water_drop_outlined,
           ),
           //!visibility
           Factor(
