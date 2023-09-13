@@ -22,68 +22,73 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: RefreshIndicator(
-      onRefresh: () async {
-        setState(() {});
-      },
-      child: FutureBuilder<CurrentWeatherModel>(
-        future: weatherService.fetchCurrentWeather(),
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: ListView(
-                children: [
-                  Center(
-                    child: Text(
-                      snapshot.data!.name,
-                      style: GoogleFonts.ledger(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+        body: SafeArea(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          setState(() {});
+        },
+        child: FutureBuilder<CurrentWeatherModel>(
+          future: weatherService.fetchCurrentWeather(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: ListView(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Text(
+                        snapshot.data!.name,
+                        style: GoogleFonts.ledger(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  DateTimeWidget(dateTime: snapshot.data!.dt),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  WeatherStatus(
-                    status: snapshot.data!.weather![0].main!.toString(),
-                  ),
-                  Temperature(
-                    temp: snapshot.data!.main!.temp.toString(),
-                  ),
-                  DetailSummary(
-                    maxTemp: snapshot.data!.main!.tempMax.toString(),
-                    minTemp: snapshot.data!.main!.tempMin.toString(),
-                    feelsLike: snapshot.data!.main!.feelsLike.toString(),
-                    description:
-                        snapshot.data!.weather![0].description.toString(),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  WeatherDetail(
-                    humidity: snapshot.data!.main!.humidity.toString(),
-                    windSpeed: snapshot.data!.wind!.speed.toString(),
-                    visibility: snapshot.data!.visibility,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const WeeklyForecast(),
-                ],
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    DateTimeWidget(dateTime: snapshot.data!.dt),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    WeatherStatus(
+                      status: snapshot.data!.weather![0].main!.toString(),
+                    ),
+                    Temperature(
+                      temp: snapshot.data!.main!.temp.toString(),
+                    ),
+                    DetailSummary(
+                      maxTemp: snapshot.data!.main!.tempMax.toString(),
+                      minTemp: snapshot.data!.main!.tempMin.toString(),
+                      feelsLike: snapshot.data!.main!.feelsLike.toString(),
+                      description:
+                          snapshot.data!.weather![0].description.toString(),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    WeatherDetail(
+                      humidity: snapshot.data!.main!.humidity.toString(),
+                      windSpeed: snapshot.data!.wind!.speed.toString(),
+                      visibility: snapshot.data!.visibility,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const WeeklyForecast(),
+                  ],
+                ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     ));
   }

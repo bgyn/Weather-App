@@ -24,7 +24,7 @@ class DetailSummary extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Deatil Summary",
+          "Detail Summary",
           style: GoogleFonts.ledger(
             fontWeight: FontWeight.bold,
             fontSize: 18,
@@ -42,7 +42,7 @@ class DetailSummary extends StatelessWidget {
           style: textStyle,
         ),
         Text(
-          'the temperature is felt in the range from $minTemp° to $maxTemp°',
+          'The temperature is felt in the range from $minTemp° to $maxTemp°',
           style: textStyle,
         ),
       ],
