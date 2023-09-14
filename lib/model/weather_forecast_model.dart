@@ -1,15 +1,21 @@
 class WeatherForecastModel {
-  List<ListItem>? list;
+  String? cod;
+  int? message;
+  int? cnt;
+  List<Detail>? list;
   City? city;
 
   WeatherForecastModel(
-      { this.list, this.city});
+      {this.cod, this.message, this.cnt, this.list, this.city});
 
   WeatherForecastModel.fromJson(Map<String, dynamic> json) {
+    cod = json['cod'];
+    message = json['message'];
+    cnt = json['cnt'];
     if (json['list'] != null) {
-      list = <ListItem>[];
+      list = <Detail>[];
       json['list'].forEach((v) {
-        list!.add(ListItem.fromJson(v));
+        list!.add(Detail.fromJson(v));
       });
     }
     city = json['city'] != null ? City.fromJson(json['city']) : null;
@@ -17,6 +23,9 @@ class WeatherForecastModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['cod'] = cod;
+    data['message'] = message;
+    data['cnt'] = cnt;
     if (list != null) {
       data['list'] = list!.map((v) => v.toJson()).toList();
     }
@@ -27,7 +36,7 @@ class WeatherForecastModel {
   }
 }
 
-class ListItem {
+class Detail {
   int? dt;
   Main? main;
   List<Weather>? weather;
@@ -39,7 +48,7 @@ class ListItem {
   Sys? sys;
   String? dtTxt;
 
-  ListItem(
+  Detail(
       {this.dt,
       this.main,
       this.weather,
@@ -51,7 +60,7 @@ class ListItem {
       this.sys,
       this.dtTxt});
 
-  ListItem.fromJson(Map<String, dynamic> json) {
+  Detail.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
     main = json['main'] != null ? Main.fromJson(json['main']) : null;
     if (json['weather'] != null) {
@@ -107,7 +116,7 @@ class Main {
   int? seaLevel;
   int? grndLevel;
   int? humidity;
-  double? tempKf;
+  int? tempKf;
 
   Main(
       {this.temp,
